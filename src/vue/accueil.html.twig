@@ -1,0 +1,116 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Accueil {% endblock %}
+{% block body %}
+
+    <!--AFFICHAGE DE L'ACCUEIL POUR UNE PERSONNE CONNECTEE    -->
+    <br>
+
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <div class="alert alert-info">
+
+                <!-- Button trigger modal -->
+                <center>
+                    <button type="button" class="btn btn-primary btn-lg" name="myModal" data-toggle="modal" data-target=".bs-example-modal-lg">
+                        Voir les rendez-vous du jour
+                    </button>
+                </center>
+
+
+                <!-- Modal -->
+                <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Rendez-vous du jour </h4>
+
+                            </div>
+                            <div class="modal-body">
+                                {%if listeP is empty %}
+
+                                    {{form.message}}
+
+                                {% else %}
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+
+
+                                            <tr><th>Patient</th><th>Date du RDV</th><th>Etat du RDV</th><th>Nombre RDV : {{form.nombreRDV}}</th><th></th></tr>
+
+                                            {% for lp in listeP%}
+
+
+                                                <tr>
+                                                    <td><a href="index.php?page=fichePatient&id_patient={{lp.id_patient}}">{{lp.num_id_national}}</a></td>
+                                                    <td><a href="index.php?page=ajouterDispensationPourLePatient&id_patient={{lp.id_patient}}">{{lp.rdv}}</a></td>
+                                                    <td>{{lp.etat}}</td>
+                                                    <td></td><td></td>
+                                                </tr>
+
+                                            {%endfor%}         
+                                        </table>
+                                    </div>
+                                {% endif %}    
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            <br>
+                            <br>
+
+
+
+
+                <center><h1><strong>Le TACOJO</strong></h1><h2>Un outil intuitif pour les dispensateurs, un outil de suivi pharmaceutique des patients vivant avec le VIH sous ARV.</h2></center>
+                <br>
+                <br>
+                <center>Le TACOJO permet...</center>
+                </br>
+                <div style="margin : 2%">
+                    <ul style="margin : inherit;padding: 0">
+                        <li>
+                            Un <strong>suivi fiable et aisé du patient </strong> avec une grande visibilité des
+                            absences (premier indicateur d’observance)
+                        </li>
+                        <li>
+                            L’amélioration de <strong>l’estimation des besoins en ARV</strong> avec la
+                            <strong>génération automatique du tableau de répartition des patients
+                                par protocole</strong>
+                        </li>
+                        <li>
+                            La sauvegarde et la transmission de <strong>données exactes et fiables</strong> avec
+                            <strong>génération automatique des rapports mensuels de PEC destinés
+                                au niveau central</strong>.
+                        </li>
+                    </ul>
+                    <br>
+                    <br>
+                    <i>
+                        Le TACOJO a été élaboré en Casamance (Sénégal) afin d’améliorer
+                        le suivi pharmaceutique des PvVIH sous ARV, suite à la demande
+                        du médecin chef de Ziguinchor.
+                        Il est le fruit de la collaboration entre les dispensateurs
+                        de la région et un collectif de pharmaciens (associations PAH - Les
+                        Pharmaciens Humanitaires et GISPE), sous la conduite du CNLS et
+                        de la DLSI.
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+    <!--<script type="text/javascript">
+$(window).on('load',function(){
+$('#myModal')show.bs.modal('show');
+});
+</script>-->
+
+{% endblock %}

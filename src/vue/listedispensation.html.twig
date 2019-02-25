@@ -1,0 +1,81 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Liste Dispensation {% endblock %}
+
+{% block body %}
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <br>            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Liste des dispensations</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">                
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title">Liste des dispensations</h3>
+                                </div>
+                                <!--<div class="col col-xs-6 text-right"><button type="button" class="btn btn-sm btn-primary btn-create">Create New</button></div>-->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div style="overflow:auto;">
+                                <table style="min-width : 100%" id="repDataTable1" class="table table-striped table-bordered table-list display">
+                                    <thead>
+                                        <tr>
+                                            <th>Numéro d'id national</th>
+                                            <th>Numéro d'inclusion</th>
+                                            <th>Profil Sérologique</th>
+                                            <th>Sexe</th>
+                                            <th>Date de naissance</th>
+                                            <th>Ligne</th>
+                                            <th>Date Inc/Chan</th>
+                                            <th>Poids</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>                                   
+                                        {% for lp in listeP%}
+                                            {% for lps in listePS%}
+                                                {% if  lp.profil_serologique == lps.id_profil%}
+                                                    {% for lpr in listePro%}
+                                                        {% if lp.protocole == lpr.id_proto%}
+                                                            {% for ltp in listeTypeProto%}
+                                                                {% if lpr.type_protocole == ltp.id_type_protocole%}
+                                                                    {% for ll in listeL%}
+                                                                        {% if lp.ligne == ll.id_ligne%}
+                                                                            <tr>
+                                                                                <td><a href="index.php?page=detail&id_patient={{lp.id_patient}}">{{lp.num_id_national}}</a></td>
+                                                                                <td>{{lp.num_inclusion}}</td>
+                                                                                <td>{{lps.nom_profil}}</td>
+                                                                                <td>{{lp.sexe}}</td>
+                                                                                <td>{{lp.date_de_naissance}}</td>
+                                                                                <td>{{ll.nom_ligne}}</td>
+                                                                                <td>{{lp.date_inclusion}}</td>
+                                                                                <td>{{lp.poids}}</td>
+                                                                            </tr>               
+                                                                        {%endif%}
+                                                                    {%endfor%}
+                                                                {%endif%}
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                    {%endfor%}
+                                                {%endif%}
+                                            {%endfor%}
+                                        {%endfor%}
+                                    </tbody>
+                                </table>
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+{% endblock %}

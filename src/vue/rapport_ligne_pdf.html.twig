@@ -1,0 +1,129 @@
+<style>
+    table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        margin-top: 15px;
+        margin: auto;
+        margin-right: auto;
+    }
+    th {
+        background-color: #3498DB; 
+        color: #FFF;
+        padding: 5px;
+    }
+    tr, td, th {
+        text-align: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        border: 1px solid black;
+
+    }
+
+    td {
+        padding: 10px;
+        font-size: 93.052%;
+    }
+
+    h1 {
+        text-align: center;
+        font-family: Helvetica, Arial, Sans-Serif;
+
+    }
+    h3 {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: Helvetica, Arial, Sans-Serif;
+        font-size: 80%;
+        text-decoration: none;
+        margin-left:  50%;
+    }
+
+</style>
+<h1>Rapport par ligne de {{leMois}} {{annee}}</h1>
+{% set num = 0 %}
+{%for i in tab %}
+    {% set num = num+1 %}
+    
+    <table>
+        <tr>
+            <th> Ligne {{num}}</th>
+            <th>Homme</th>
+            <th>  </th>
+            <th></th>
+            <th>Femme</th>
+            <th>  </th>
+            <th></th>
+            <th>Total</th>
+            <th>  </th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <td>Enfants < 14 ans</td>
+            <td> VIH 1  </td>
+            <td> VIH 2 </td> 
+            <td> VIH 1+2 </td>
+            <td> VIH 1 </td>
+            <td> VIH 2 </td>
+            <td> VIH 1+2 </td>
+            <td> VIH 1 </td>
+            <td> VIH 2  </td>
+            <td> VIH 1+2  </td>
+        </tr>
+        <tr>
+            <td>Nombre de patients</td>
+            <td>{{i.M_VIH1_0}} </td>
+            <td>{{i.M_VIH2_0}} </td> 
+            <td>{{i.M_VIH3_0}}</td>
+            <td>{{i.F_VIH1_0}} </td>
+            <td>{{i.F_VIH2_0}} </td>
+            <td>{{i.F_VIH3_0}} </td>
+            <td>{{i.M_VIH1_0 + i.F_VIH1_0}}</td>
+            <td> {{i.M_VIH2_0 + i.F_VIH2_0}} </td>
+            <td> {{i.M_VIH3_0 + i.F_VIH3_0}} </td>
+        </tr>
+
+        <tr>
+            <th>Ligne {{num}}</th>
+            <th>Homme</th>
+            <th>  </th>
+            <th></th>
+            <th>Femme</th>
+            <th>  </th>
+            <th></th>
+            <th>Total</th>
+            <th>  </th>
+            <th></th>
+        </tr>
+        <tr>
+
+            <td>Adultes </td>
+            <td> VIH 1  </td>
+            <td> VIH 2 </td> 
+            <td> VIH 1+2 </td>
+            <td> VIH 1 </td>
+            <td> VIH 2 </td>
+            <td> VIH 1+2 </td>
+            <td> VIH 1 </td>
+            <td> VIH 2  </td>
+            <td> VIH 1+2  </td>
+        </tr>
+        <tr>
+            <td>Nombre de patients</td>
+            <td>{{i.M_VIH1_1}} </td>
+            <td>{{i.M_VIH2_1}} </td> 
+            <td>{{i.M_VIH3_1}} </td>
+            <td>{{i.F_VIH1_1}} </td>
+            <td>{{i.F_VIH2_1}} </td>
+            <td>{{i.F_VIH3_1}} </td>
+            <td>{{i.M_VIH1_1 + i.F_VIH1_1}}</td>
+            <td>{{i.M_VIH2_1 + i.F_VIH2_1}}</td>
+            <td>{{i.M_VIH3_1 + i.F_VIH3_1}}</td>
+        </tr>
+
+    </table>
+{%endfor%}
+
+
+
+

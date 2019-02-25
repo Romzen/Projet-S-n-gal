@@ -1,0 +1,113 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Modifier un utilisateur {% endblock %}
+{% block body %}
+
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+
+
+            {% if form.utilisateur is defined %}
+
+                {%if form.utilisateur != null %}
+
+                    <br>
+
+                    <div class="col-md-1"></div>
+
+                    <div class="col-md-10">
+
+                        <br>
+
+                        <form class="form-group" method="POST" action="index.php?page=modifUtilisateur" enctype="multipart/form-data">
+
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">
+
+                                    <div class="panel-title">
+
+                                        <div class="center">
+
+                                            <h3>Modification de l'utilisateur {{form.utilisateur.nom_utilisateur}}</h3>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="panel-body">
+
+                                    <input class="form-control" type="hidden" name="id_utilisateur" id="id_utilisateur" value="{{form.utilisateur.id_utilisateur}}"/>
+                                    <label>Nom</label>
+
+                                    <input class="form-control" type="text" name="nom_utilisateur" id="nom_utilisateur" value="{{form.utilisateur.nom_utilisateur}}"/><br>
+                                    <label>Prénom</label>
+
+                                    <input class="form-control" type="text" name="prenom_utilisateur" id="prenom_utilisateur" value="{{form.utilisateur.prenom_utilisateur}}" /><br>
+                                    <label>Login</label>
+
+                                    <input class="form-control" type="text" name="login" id="login" value="{{form.utilisateur.login}}" /><br>
+                                    <label>Mot de passe</label>
+
+                                    <input class="form-control" type="text" name="mdp" id="mdp" placeholder="Mot de passe"/><br>
+                                    <label>Grade</label>
+
+                                    <select class="form-control" id="grade" name="grade">';
+
+                                        {% for  lg in liste %}{
+
+                                            {% if lg.id_grade == lp.grade %}
+
+                                                <option selected="selected" value="{{lp.grade}}">{{lg.nom_grade}}</option>
+
+
+
+                                            {% else %}
+
+                                                <option value="{{lp.grade}}'">{{lg.nom_grade}}</option>
+                                            {%endif%} 
+                                        {%endfor%}
+
+                                    </select>
+
+                                    <br>
+
+
+
+                                    <div class="pull-right">
+
+                                        <a class="btn btn-default" value="back" onclick="history.go(-1)" role="button">Précédent</a>  
+                                        <button type="submit" class="btn btn-warning" id="btModifier" name="btModifier">Modifier</button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <div class="col-md-1"></div>
+
+
+
+                {%endif%}
+            {%endif%}
+
+
+        </div>
+
+    </div>
+
+</div>       
+
+{%endblock%}

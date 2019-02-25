@@ -1,0 +1,79 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Co-infection {% endblock %}
+{% block body %}
+
+    {%if form.valide == true%}
+        <div class="alert alert-danger" role="alert">{{form.message}}</div>
+    {%else%}
+        {%if form.valide == false%}
+            <div class="alert alert-success" role="alert">{{form.message}}</div>
+        {%endif%}
+    {%endif%}
+
+    <form class="form-inline" method="POST" action="index.php?page=listeCo_infection" enctype="multipart/form-data" >  
+        <div class="container">
+            <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">            
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="center">
+                            <h2>Les Co-infections</h2>
+                        </div>
+                    </div>        
+                    <div class="panel-body">
+                        <div class="form-group">
+
+                            <label>Identification</label>
+                            <input class="form-control" type="text" name="nom_infection" id="nom_infection" placeholder="Nom de l'infection" />
+
+                            <label>Description</label>
+                            <input class="form-control"  type="text" name="desc" id="desc" placeholder="Description" />
+
+                        </div>
+                        <div class="form-group" style="float : right">
+                            <button type="submit" class="btn btn-success" id="btAjouter" name="btAjouter">AJOUTER</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <form class="form" method="POST" action="index.php?page=listeCo_infection" enctype="multipart/form-data" >  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default panel-table">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col col-xs-6">
+                                            <h3 class="panel-title">Liste des co-infections</h3>
+                                        </div>                          
+                                    </div>
+                                </div> 
+                                <div class="panel-body">
+                                    <table id="repDataTable1" class="table table-striped table-bordered table-list display">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 150px">Nom</th>
+                                                <th>Description</th>
+                                                <th>Supprimer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>                        
+                                            {% for l in listeCo %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="index.php?page=modifProtocole&id_proto={{l.id_co_infection}}">{{l.nom_co_infection}}</a></td>
+                                                    <td>{{l.description}}</td>
+                                                    <td><button type="submit" class="btn btn-danger" id="btSupprimer" name="btSupprimer" value="{{l.id_co_infection}}">SUPPRIMER</button></td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            {% endblock %}

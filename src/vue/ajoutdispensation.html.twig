@@ -1,0 +1,61 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Ajout Dispensation {% endblock %}
+
+{% block body %}        
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <br>
+        <br>
+        <div class="mui-container-fluid">    
+            <div class="panel panel-default">
+                <div class="center">
+                    <h2>Ajout d'une dispensation</h2>
+                </div>
+                <div class="panel-heading">
+                    <h3> Rechercher un patient </h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-group" method="POST" action="index.php?page=ajout_dispensation" enctype="multipart/form-data" >                    
+                        <div class="col-md-12 ui-widget">
+                            <label for="num_id_national">Numéro d'identification national</label>
+                            <input type="search" name="num_id_national" id="num_id_national" class="input-sm form-control" placeholder="Recherche" required>
+
+                        </div>
+
+                </div>
+                                   
+                <div class="col-md-12" style="padding-top : 10px">
+                    <div class="center">
+                        <button style="float : right" type="submit" class="btn btn-primary btn-sm" name="btPatient"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+                    </div>
+                </div>
+                </form>
+
+            </div>
+            <br><br>
+
+            <div class= "panel-heading">
+                {%for l in listeT %}
+                    <div class="well center alert alert-success" role="alert">
+                        <strong>Patient n°{{l.num_id_national}}</strong>
+                        <br> 
+                        Pour voir ses dispensations <a href="index.php?page=detail&id_patient={{l.id_patient}}">cliquez ici</a>
+                        <br> 
+                        Pour ajouter une dispensation <a href="index.php?page=ajouterDispensationPourLePatient&id_patient={{l.id_patient}}">cliquez ici</a>
+                    </div>          
+                {%endfor%}
+                {%if unPatient.trouvenon == true %}
+                    <br><div class="well center alert alert-danger" role="alert">Le patient que vous avez inséré n'existe pas !</div>
+                    <script>$(".well").fadeTo(5000, 200).slideUp(500);</script>
+                {%endif%}
+
+            </div> 
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Medicament {% endblock %}
+{% block body %}
+
+<!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">
+                {%if form.valide1 == false%}
+                    <div class="alert alert-danger" role="alert">
+                        {{form.message1}}
+                    </div>                
+                {%endif%}
+                {%if form.valide2 == false%}
+                    <div class="alert alert-danger" role="alert">
+                        {{form.message2}}
+                    </div>                
+                {%endif%}
+                {%if form.valide3 == false%}
+                    {%if form.valide == false%}
+                        <div class="alert alert-danger" role="alert">
+                            {{form.message}}
+                        </div>
+                    {%else%}
+                        {%if form.valide == true%}
+                        <div class="alert alert-success" role="alert">
+                            {{form.message}}
+                        </div>
+                        {%endif%}
+                    {%endif%}
+                {%endif%}
+                
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Acronymes des antirétroviraux</h2>
+                    </div>
+                </div>
+                <form class="form-inline" action="index.php?page=medicament"  method="POST" enctype="application/x-www-form-urlencoded">
+                
+                    <div class="panel-body">
+                        <div class="form-group">
+
+                                <input class="form-control" type="text" name="acronyme_medicament" id="acronyme_medicament" placeholder="Acronyme" />
+
+                                <input class="form-control" type="text" name="nom_medicament" id="nom_medicament" placeholder="Signification" />
+
+                                <button type="reset" class="btn btn-default" >Réinitialiser</button>
+                                <button type="submit" class="btn btn-success" id="btacronyme" name="btacronyme">AJOUTER</button>
+                                <button type="submit" class="btn btn-danger" id="btSupprimer" name="btSupprimer">SUPPRIMER</button>
+                                <br />
+
+                        </div>
+                    </div>
+                
+                
+                
+                    <table id="repDataTable1" class="table table-striped table-bordered table-list display" style="min-width : 100%">            
+                        <thead>
+                            <tr>
+                                <th>Acronyme</th><th>Signification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for m in listeMedicament %}
+                                <tr>
+                                    
+                                    <td><input type="checkbox" name="cocher[]" id="cocher[]"value="{{m.id_medicament}}"/>   
+                                        <a href="index.php?page=modifMedicament&id_medicament={{m.id_medicament}}">{{m.acronyme_medicament}}</a></td>
+                                    <td>{{m.nom_medicament}}</td>
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>        
+                </form>                
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

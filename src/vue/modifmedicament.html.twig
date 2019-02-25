@@ -1,0 +1,91 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Modification medicament {% endblock %}
+{% block body %}            
+
+            <div class="col-md-1"></div>
+
+              <div class="col-md-10">
+                  <br>
+                  
+              <br>
+              
+              {% if form.medicament is defined %} 
+                    {% if form.medicament != null %}
+                        
+                        <br><br><br>
+
+                <form class="form-group" method="POST" action="index.php?page=modifMedicament" enctype="multipart/form-data">
+
+                  <div class="panel panel-default">
+
+                    <div class="panel-heading">
+
+                      <div class="panel-title">
+
+                        <div class="center">
+
+                          <h3>Modification d'un acronyme</h3>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                      
+                      
+
+                    <div class="panel-body">
+
+                      <input type="hidden" value="{{form.medicament.id_medicament}}" name="id_medicament" id="id_medicament"/>
+
+                      <label>Acronyme</label>
+                      <input class="form-control" type="text" name="acronyme_medicament" id="acronyme_medicament" value="{{form.medicament.acronyme_medicament}}"/><br>
+
+                      <label>Signification</label>
+                      <input class="form-control" type="text" name="nom_medicament" id="nom_medicament" value="{{form.medicament.nom_medicament}}"/><br>
+
+
+                      <br><br>
+
+                      <div class="pull-right">
+                        <a class="btn btn-default" value="back" onclick="history.go(-1)" role="button">Précédent</a>
+                        <button type="submit" class="btn btn-warning" id="btModifier" name="btModifier">Modifier</button>
+
+                        
+                      </div>
+
+                    </div>
+                     
+
+                  </div>
+
+                </form>
+                      
+                          {% else %} 
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+       <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=medicament">Retourner sur la liste des médicaments</a></h1>
+    {% endif %}
+    
+{% else %} 
+    
+    {% if form.valide == true %}
+        
+         <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+         <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=medicament">Retourner sur la liste des médicaments</a></h1>
+         
+    {% else %}
+        
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=medicament">Retourner sur la liste des médicaments</a></h1>
+            
+    {% endif %} 
+    
+{% endif %}
+                      
+             </div>
+
+            <div class="col-md-1"></div>
+            
+{%endblock%}            
+            

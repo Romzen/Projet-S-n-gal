@@ -1,0 +1,117 @@
+
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Ajouter un Patient {% endblock %}
+{% block body %}
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<!--<div id="content-wrapper">-->
+        <div class="container">
+            <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">
+                <br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="center">
+                            <h2>Ajouter un patient</h2>
+                        </div>
+                    </div>
+                    <br>
+                    {%if form.patientExiste is defined%}
+                        <div class="well center alert alert-danger" role="alert">Le patient existe deja !!!</div>
+                        <script>$(".well").fadeTo(5000, 200).slideUp(500);</script>
+                    {%endif%}
+                    {%if form.patientAjout is defined%}
+                        <br><div class="well center alert alert-success" role="alert">Vous avez ajouté un Patient !</div>
+                        <script>$(".well").fadeTo(5000, 200).slideUp(500);</script>
+                    {%endif%}
+                    {%if form.ajoutImpo is defined%}
+                        <br><div class="well center alert alert-danger" role="alert">Impossible d\'ajouter un Patient !</div>
+                        <script>$(".well").fadeTo(5000, 200).slideUp(500);</script>
+                    {%endif%}
+                    
+                    <div class="panel-body">
+                        <form class="form-group" method="POST" action="index.php?page=ajouter_patient" enctype="multipart/form-data" style="margin-right:20%; margin-left : 20%">
+                            <div class="form-group">
+                                <label for="num_id_national">Numéro Identification national</label>
+                                <input type="text" class="form-control" name="num_id_national" id="num_id_national" placeholder="Numéro Identification national">
+                                <div><span class="erreur" id="dividnational">Erreur sur le numéro d'identification national</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="num_inclusion">Numéro Inclusion</label>
+                                <input type="text" class="form-control" name="num_inclusion" id="num_inclusion" placeholder="Numéro Inclusion">
+                                 <div><span class="erreur" id="divnuminclusion">Erreur sur le numéro d'inclusion </span></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sexe">Sexe</label>
+                                <select class="form-control" name="sexe" id="sexe" />
+                                  <option value="M">Homme</option>
+                                  <option value="F">Femme</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="poids">Poids à l'inclusion</label>
+                                <input class="form-control" type="number" name="poids" id="poids" placeholder="Poids (en kg)"/>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="date_de_naissance">Date de naissance</label>
+                                <input class="datepicker form-control" type="date" name="date_de_naissance" id="date_de_naissance" placeholder="aaaa-mm-jj"/>
+                                <div><span class="erreur" id="divDateNaissance">Erreur sur la date de naissance</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date_inclusion">Date d'inclusion</label>
+                                <input class="datepicker form-control" type="date" name="date_inclusion" id="date_inclusion" placeholder="aaaa-mm-jj"/>
+                                <div><span class="erreur" id="divDateInclusion">Erreur sur la date d'inclusion</span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profil_serologique">Profil sérologique</label>
+                                <select class="form-control" id="profil_serologique" name="profil_serologique">                                
+                                    {% for lps in lesProfilsSérologiques%}
+                                        <option value="{{lps.id_profil}}">{{lps.nom_profil}}</option>                                    
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="co_infection"> Co-infection(s) </label>
+                                <br>
+                                {%for lci in listeCoInf %}
+                                    <input type="checkbox" name="choix[]" class="case" value ="{{lci.id_co_infection}}" id="case{{lci.id_co_infection}}">{{lci.nom_co_infection}}
+                                {%endfor%}                                
+                            </div>
+                            <div class="form-group">
+                                <label for="protocole">Protocole d'inclusion</label>
+                                <select class="form-control" id="protocole" name="protocole">                                
+                                {%for lpro in lesProtocoles %}
+                                    <option value="{{lpro.id_proto}}">{{lpro.nom_proto}}</option>
+                                {%endfor%}                                 
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ligne">Ligne</label>
+                                <select class="form-control"  id="ligne" name="ligne">
+                                    
+                                    {%for ll in lesLignes%}
+                                        <option value="{{ll.id_ligne}}">{{ll.nom_ligne}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inclusion">Type d'inclusion</label>
+                                <select class="form-control" name="inclusion" id="inclusion" />
+                                  <option value="1">Nouvelle inclusion</option>
+                                  <option value="2">Transfert entrant</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="float : right">
+                                <button type="reset" class="btn btn-default">Réinitialiser</button>
+                                <button type="submit" class="btn btn-success" id="btPatient" name="btPatient">AJOUTER</button>
+                            </div>
+
+
+                        </form>
+
+</div></div></div></div>';
+{%endblock%}

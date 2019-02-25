@@ -1,0 +1,135 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Protocoles {% endblock %}
+{% block body %}
+    
+    <form class="form-inline" method="POST" action="index.php?page=protocole" enctype="multipart/form-data" >  
+        <div class="container">
+            <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">            
+                {%if form.valide1 == false%}
+                    <div class="alert alert-danger" role="alert">{{form.message1}}</div>                
+                {%endif%}
+                {%if form.valide3 == false%}
+                    {%if form.valide == false%}
+                        <div class="alert alert-danger" role="alert">{{form.message}}</div>
+                    {%else%}
+                        {%if form.valide == true%}
+                        <div class="alert alert-success" role="alert">{{form.message}}</div>
+                        {%endif%}
+                    {%endif%}
+                {%endif%}    
+                <br>      
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="center">
+                            <h2>Les Protocoles</h2>
+                        </div>
+                    </div>        
+                    <div class="panel-body">
+                        <div class="form-group">
+                            
+                            <label>Nom</label>
+                            <input class="form-control" type="text" name="nom_proto" id="nom_proto" placeholder="Nom du protocole"/>
+                            
+                            <label>Adulte</label>
+                            <input type="checkbox" name="cocherAdulte[]" id="cocherAdulte[]" value="oui" />
+                            
+                            <label>Enfant</label>
+                            <input type="checkbox" name="cocherEnfant[]" id="cocherEnfant[]" value="oui"/>
+                            
+                            <label></label>
+                            <input class="form-control" type="text" name="remarque" id="remarque" placeholder="Remarque" />
+                            
+                            <select class="form-control" id="type_protocole" name="type_protocole">
+                                {% for t in liste_type_protocole%}
+                                    <option value="{{t.id_type_protocole}}">{{t.type_protocole}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group" style="float : right">
+                            <button type="reset" class="btn btn-default">Réinitialiser</button>
+                            <button type="submit" class="btn btn-success" id="btProtocole" name="btProtocole">AJOUTER</button>
+                            <button type="submit" class="btn btn-danger" id="btSupprimer" name="btSupprimer">SUPPRIMER</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-table">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col col-xs-6">
+                                         <h3 class="panel-title">Protocoles recommandés</h3>
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="repDataTable1" class="table table-striped table-bordered table-list display" style="min-width : 100%"><form method="POST" action="index.php?page=protocole">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 150px">Protocole</th>
+                                            <th>Adulte</th>
+                                            <th>Enfant</th>
+                                            <th>Remarque</th>
+                                        </tr>
+                                    </thead>                            
+                                    <tbody>
+                                        {% for p in listeProtocole %}
+                                            {% if p.type_protocole == 1 %}
+                                                <tr>
+                                                    <td><input type="checkbox" name="cocher[]" id="cocher[]"value="{{p.id_proto}}"/>   
+                                                        <a href="index.php?page=modifProtocole&id_proto={{p.id_proto}}">{{p.nom_proto}}</a></td>
+                                                    <td>{{p.adulte}}</td>
+                                                    <td>{{p.enfant}}</td>
+                                                    <td>{{p.remarque}}</td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}                                
+                                   </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>
+            <div class="col-md-12">
+
+                <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col col-xs-6">
+                                <h3 class="panel-title">Protocoles atypiques</h3>
+                            </div>                          
+                        </div>
+                    </div> 
+                    <div class="panel-body">
+                        <table id="repDataTable1" class="table table-striped table-bordered table-list display">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px">Protocole</th>
+                                    <th>Adulte</th>
+                                    <th>Enfant</th>
+                                    <th>Remarque</th>
+                                </tr>
+                            </thead>
+                            <tbody>                        
+                                {% for p in listeProtocole %}
+                                    {% if p.type_protocole == 2 %}  
+                                        <tr>
+                                           <td><input type="checkbox" name="cocher[]" id="cocher[]"value="{{p.id_proto}}"/>   
+                                                        <a href="index.php?page=modifProtocole&id_proto={{p.id_proto}}">{{p.nom_proto}}</a></td>
+                                            <td>{{p.adulte}}</td>
+                                            <td>{{p.enfant}}</td>
+                                            <td>{{p.remarque}}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </form>
+{% endblock %}

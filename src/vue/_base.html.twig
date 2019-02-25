@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-type" content="text/html">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <!--Permet le côté responsive de boostrap, enelevé à cause du double burger dans la nabvar-->
+
+        <link href="css/mui.min.css" rel="stylesheet" type="text/css"  />
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/inscription.css" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/jquery-ui.css" type="text/css" media="screen" />
+        <link href="css/jquery.datatable.min.css" rel="stylesheet" type="text/css" />
+
+        <script src="js/mui.min.js"></script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/caseAcocher.js"></script>
+        <script src="js/formulaire.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script src="js/jquery-ui.js" ></script>
+        <script src="js/jquery.datatable.min.js" ></script>
+        <script src="js/jquery.datatable.bootstrap.min.js" ></script>
+        <script type="text/javascript">$(document).ready(function(){$("#myModal").modal('show');});</script>
+        <script src="js/popup.js"></script>
+
+
+
+        <title>TACOJO</title>
+    </head>
+    <body>
+
+
+
+
+
+        <!--BARRE DE NAVIGATION HORIZONTALE-->
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius : 0px; width : 100%; position : fixed;">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button style="top : 0; left : 1%" type="button" class="navbar-btn hamburger open-nav is-closed navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="hamb-top"></span>
+                        <span class="hamb-middle"></span>
+                        <span class="hamb-bottom"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <button style="top : 0; left : 1%" type="button" class="navbar-btn hamburger open-nav is-closed navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="hamb-top"></span>
+                                <span class="hamb-middle"></span>
+                                <span class="hamb-bottom"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <!--BARRE DE NAVIGATION VERTICALE-->
+        <div id="wrapper">
+            <div class="overlay"></div>
+
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a></li>                        
+                    <li><h1><strong><a href="#" class="close"><i class="fa fa-times" aria-hidden="true"></i></a><a href="index.php?page=accueil">TACOJO</a></strong></h1></li>
+
+                    {%if session.login is defined %}
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                Patients
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=ajouter_patient" style="color: rgb(93, 182, 166)">Ajouter un patient</a></li>
+                                <li><a href="index.php?page=patient" style="color: rgb(93, 182, 166)">Liste des patients</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                Protocoles
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=protocole" style="color: rgb(93, 182, 166)">Afficher les protocoles</a></li>
+                                <li><a href="index.php?page=medicament" style="color: rgb(93, 182, 166)">Afficher les acronymes</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                Dispensation
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=suiviDispensation" style="color: rgb(93, 182, 166)">Suivis des dispensations</a></li>
+                                <!--<li><a href="index.php?page=dispensation" style="color: rgb(93, 182, 166)">Dispensations</a></li>-->
+                                <li><a href="index.php?page=ajout_dispensation" style="color: rgb(93, 182, 166)">Ajouter une dispensation</a></li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                Répartition
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=repartition_adulte" style="color: rgb(93, 182, 166)">Répartition adulte</a></li>
+                                <li><a href="index.php?page=repartition_enfant" style="color: rgb(93, 182, 166)">Répartition enfant</a></li>
+                                <li><a href="index.php?page=repartition_poids" style="color: rgb(93, 182, 166)">Répartition Poids</a></li>
+                            </ul>
+                        </li>
+
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                Rapports
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=rapport" style="color: rgb(93, 182, 166)">Rapports</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-briefcase" aria-hidden="true"></i>
+                                Rendez-vous
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=listeRDV" style="color: rgb(93, 182, 166)">Voir les Rendez-vous</a></li>
+                                <li><a href="index.php?page=listerdvpdf" style="color: rgb(93, 182, 166)">PDF des RDV</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                                Utilisateurs
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=utilisateur" style="color: rgb(93, 182, 166)">Liste des utilisateurs</a></li>
+                                <li><a href="index.php?page=droit" style="color: rgb(93, 182, 166)">Liste des droits des utilisateurs</a></li>
+                                <li><a href="index.php?page=ajout_utilisateur" style="color: rgb(93, 182, 166)">Ajouter un utilisateur</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a style="color: rgb(122, 122, 122)" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                En savoir plus
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="index.php?page=savoir" style="color: rgb(93, 182, 166)">Liste des développeurs</a></li>
+                            </ul>
+                        </li>
+
+
+                        <!--DECONNEXION-->
+                        <li>
+                            <strong>
+                                <a href="index.php?page=deconnexion">
+                                    <i class="fa fa-sign-out"></i>  Déconnexion
+                                </a>
+                            </strong>
+                        <li>
+
+
+
+                        {%else%}
+                        <li>
+                            <strong>
+                                <a href="index.php?page=connexion">
+                                    <i class="fa fa-sign-out"></i>  Se connecter
+                                </a>
+                            </strong>
+                        </li>
+                        <li><a style="color : #737373; text-decoration : none" target="_blank" href="http://arras-sio.com">www.arras-sio.com</a></li>                        
+
+                    {%endif%}
+                </ul>
+            </nav>
+        </div>
+
+        {% block body %}
+
+        {% endblock%} 
+    </body>

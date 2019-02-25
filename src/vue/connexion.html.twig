@@ -1,0 +1,46 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Connexion {% endblock %}
+{% block body %}
+     <!--Si la personne n'est pas connectée-->
+    <!--AFFICHAGE DE L'ACCUEIL POUR UNE PERSONNE NON CONNECTEE-->	
+        <!--<div id="content-wrapper">-->
+        <div class="container">            
+            <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">                
+                <div id="loginbox" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    <div class="panel panel-default" >
+                        {%if form.message is defined%}
+                            <div class="well center alert alert-danger" role="alert">{{form.message}}</div>
+                            <script>$(".well").fadeTo(5000, 200).slideUp(500);</script>
+                        {%endif%}
+                        <div class="panel-heading">
+                            <div class="panel-title text-center">Se connecter</div>
+                        </div>
+                        <div class="panel-body" >
+                            
+                            <form action="index.php?page=connexion" name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input class="form-control" type="text" id="login" name="login" placeholder="exemple@domaine.fr" required/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input class="form-control" type="password" id="mdp" name="mdp" placeholder="Votre mot de passe" required/>
+                                </div>
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-sm-12 controls">
+                                        <button type="submit" class="btn btn-warning btn btn-default pull-right" id="btConnexion" class="glyphicon glyphicon-log-in" name="btConnexion" >Se connecter</button>
+                                    </div>
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+    
+{%endblock%}

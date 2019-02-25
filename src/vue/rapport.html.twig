@@ -1,0 +1,175 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Protocoles {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Rapport</h2>
+                    </div>
+                </div>
+            </div>  
+            
+            <div  name="div1" class="">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-table">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col col-xs-9">
+                                        <h3 class="panel-title">Rapport VIH de l'année 
+                                            <select onChange="window.location = 'index.php?page=rapport&annee=' + this.value;" name="annee" onClic="index.php?page=rapport"> 
+                                                {%for a in listeAnnee%}
+                                                    <option value="{{a.annee}}" {%if get.annee is not defined and a.annee == "now"|date('Y')%} selected {%endif%}{% if a.annee == get.annee%} selected {%endif%}>{{a.annee}}</option>
+                                                {%endfor%}
+                                            </select>   
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <table  id="repDataTable1" class="table table-striped table-bordered table-list ">
+                                    <thead>
+                                        <tr>
+                                            <th>Action </th>
+                                            <th>Janvier  </th>
+                                            <th>Fevrier </th>
+                                            <th>Mars     </th>
+                                            <th>Avril    </th>
+                                            <th>Mai      </th>
+                                            <th>Juin     </th>
+                                            <th>Juillet  </th>
+                                            <th>Aout     </th>
+                                            <th>Septembre </th>
+                                            <th>Octobre   </th>
+                                            <th>Novembre </th>
+                                            <th>Decembre </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Voir le tableau</td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=01&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=02&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=03&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=04&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=05&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=06&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=07&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=08&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=09&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=10&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=11&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_VIH&mois=12&annee={{annee}}" >VOIR</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Voir le PDF (inactif)</td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=01&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=02&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=03&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=04&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=05&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=06&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=07&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=08&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=09&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=10&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=11&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=12&annee={{annee}}" >PDF</a></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div  name="div2" class="">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-table">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col col-xs-9">
+                                        <h3 class="panel-title">Rapport ligne de l'année 
+                                            <select onChange="window.location = 'index.php?page=rapport&annee=' + this.value;" name="annee" onClic="index.php?page=rapport"> 
+                                                {%for a in listeAnnee%}
+                                                    <option value="{{a.annee}}" {%if get.annee is not defined and a.annee == "now"|date('Y')%} selected {%endif%}{% if a.annee == get.annee%} selected {%endif%}>{{a.annee}}</option>
+                                                {%endfor%}
+                                            </select>   
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <table  id="repDataTable1" class="table table-striped table-bordered table-list ">
+                                    <thead>
+                                        <tr>
+                                            <th>Action </th>
+                                            <th>Janvier  </th>
+                                            <th>Fevrier </th>
+                                            <th>Mars     </th>
+                                            <th>Avril    </th>
+                                            <th>Mai      </th>
+                                            <th>Juin     </th>
+                                            <th>Juillet  </th>
+                                            <th>Aout     </th>
+                                            <th>Septembre </th>
+                                            <th>Octobre   </th>
+                                            <th>Novembre </th>
+                                            <th>Decembre </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Voir le tableau</td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=01&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=02&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=03&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=04&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=05&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=06&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=07&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=08&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=09&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=10&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=11&annee={{annee}}" >VOIR</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne&mois=12&annee={{annee}}" >VOIR</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Voir le PDF</td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=01&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=02&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=03&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=04&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=05&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=06&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=07&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=08&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=09&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=10&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=11&annee={{annee}}" >PDF</a></td>
+                                            <td> <a href="index.php?page=rapport_ligne_pdf&mois=12&annee={{annee}}" >PDF</a></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}

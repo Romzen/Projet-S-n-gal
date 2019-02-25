@@ -1,0 +1,118 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Fiche Patients {% endblock %}
+{% block body %}
+
+    <form class="form-group" method="POST" action="index.php?page=fichePatient" enctype="multipart/form-data">
+        <div class="container">
+            <div class="mui--appbar-height"></div>
+            <div class="mui-container-fluid">
+                <br/>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="center">
+                            <h2>Patient n°{{lePatient.num_id_national}}</h2>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <table style="min-width : 100%" class="table table-striped table-bordered table-list display">
+                            <tr>
+                                <th class="demitableau">Numéro d'identification national</th>
+                                <td class="demitableau">{{lePatient.num_id_national}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Numéro d'inclusion</th>
+                                <td class="demitableau">{{lePatient.num_inclusion}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Profil sérologique</th>
+                                <td class="demitableau">{{lePatient.nom_profil}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Sexe</th>
+                                <td class="demitableau">{{lePatient.sexe}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Date de naissance</th>
+                                <td class="demitableau">{{lePatient.date_de_naissance}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Date d'inclusion</th>
+                                <td class="demitableau">{{lePatient.date_inclusion}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Type d'inclusion</th>
+                                <td class="demitableau">{{lePatient.type_inclusion}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Protocole</th>
+                                <td class="demitableau">{{lePatient.nom_proto}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Co-infection</th>
+                                <td class="demitableau">{{lePatient.nom_co_infection}}</td>
+                            </tr>
+
+                            <tr>
+                                <th class="demitableau">Date de la dernière dispensation</th>
+                                <td class="demitableau">{{lePatient.derniereDisp}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Ligne de traitement</th>
+                                <td class="demitableau">{{lePatient.nom_ligne}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Poids</th>
+                                <td class="demitableau">{{lePatient.poids}} kg <a href="index.php?page=graphe&id_patient={{lePatient.id_patient}}">Graphe</a></td>
+                            </tr>
+
+                            <tr>
+                                <th class="demitableau">Date du prochain rendez-vous</th>
+                                <td class="demitableau">{{lePatient.rdv}}</td>
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Statut du patient</th>                                    
+                                <td>{{lePatient.nom_etat_dispen}}</td>                                    
+                            </tr>
+                            <tr>
+                                <th class="demitableau">Accès aux historiques de dispensations</th>
+                                <td class="demitableau">
+                                    <a href="index.php?page=detail&id_patient={{lePatient.id_patient}}">Dispensation du patient</a>
+                                </td>
+                            </tr> 
+                        </table>
+                                
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col col-xs-4">
+                                    <div class="form-group" style="float : left">
+                                        <label> Modifier le statut du patient  :   </label>
+                                        <select name="etat_patient" id="etat_patient">
+                                            <option value="0"> </option>
+                                            {%for ld in listeDispensation%}
+                                                <option value="{{ld.id_etat_dispen}}">{{ld.nom_etat_dispen}} </option>                    
+                                            {%endfor%}
+                                        </select>                
+                                        <button type="submit" name="btModif">Modifier</button>
+                                    </div>
+                                </div>
+                                <div class="col col-xs-8">
+
+                                    <div class="form-group" style="float : right">
+                                        <a class="btn btn-default" value="back" href="index.php?page=patient" role="button">Précédent</a>
+                                        <a class="btn btn-warning" href='index.php?page=modifPatient&id_patient={{lePatient.id_patient}}'>Modifier la fiche du patient</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    
+                    </div>
+                </div>
+                                    
+                <input type="hidden" name="num_id_national" id="num_id_national" value="{{lePatient.num_id_national}}"/>
+                <input type="hidden" name="id_patient" id="id_patient" value="{{lePatient.id_patient}}"/>
+
+            </div>
+        </div>
+    </form>
+{%endblock%}

@@ -1,0 +1,140 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Accueil {% endblock %}
+{% block body %}
+
+    <!--s <style type="text/css">
+         #container {
+             min-width: 310px;
+             max-width: 800px;
+             height: 400px;
+             margin: 0 auto
+         }
+     </style>-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Graphique des poids du patient pour 
+                            <select onChange="window.location = 'index.php?page=graphe&id_patient={{get.id_patient}}&annee=' + this.value;" name="year" onClic="index.php?page=graphe&id_patient={{get.id_patient}}"> 
+                                {%for a in listeAnnee%}
+                                    <option value="{{a.annee}}" {%if get.annee is not defined and a.annee == "now"|date('Y')%} selected {%endif%}{% if a.annee == get.annee%} selected {%endif%}>{{a.annee}}</option>
+                                {%endfor%}
+                            </select>   
+                        </h2>                    
+                    </div>
+                </div>
+            </div>
+
+
+            {%if form.valide != true%}
+
+                <h1>{{form.message}}</h1>
+                <h1><a href="index.php?page=fichePatient&id_patient={{get.id_patient}}">Retourner a la liste des patients</a></h1>
+
+            {%else%}
+
+
+
+            </div>
+
+            <div id="container" >
+                <div class="panel-body">
+                    <script src="../web/js/code/highcharts.js"></script>
+                    <script src="../web/js/code/modules/series-label.js"></script>
+                    <script src="../web/js/code/modules/exporting.js"></script>
+                    <script src="../web/js/code/modules/export-data.js"></script>
+
+                    <script type="text/javascript">
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    Highcharts.setOptions({
+                                        lang: {
+                                            months: [
+                                                'Janvier', 'Février', 'Mars', 'Avril',
+                                                'Mai', 'Juin', 'Juillet', 'Août',
+                                                'Septembre', 'Octobre', 'Novembre', 'Décembre'
+                                            ],
+                                            weekdays: [
+                                                'Dimanche', 'Lundi', 'Mardi', 'Mercredi',
+                                                'Jeudi', 'Vendredi', 'Samedi'
+                                            ]
+
+                                        }
+                                    });
+                                    
+                                    Highcharts.chart('container', {
+
+                                        title: {
+                                            text: 'Poids de {{num_id_national}}'
+                                        },
+
+                                        xAxis: {
+                                            type: 'datetime',
+                                            dateTimeLabelFormats: {
+                                                month: '%b. %e ',
+                                                year: '%b'
+                                            },
+                                            title: {
+                                                text: 'Date'
+                                            }
+                                        },
+
+                                        yAxis: {
+                                            title: {
+                                                text: 'Poids'
+                                            }
+                                        },
+                                        legend: {
+                                            layout: 'vertical',
+                                            align: 'right',
+                                            verticalAlign: 'middle'
+                                        },
+
+                                        plotOptions: {
+                                            line: {
+                                                dataLabels: {
+                                                    enabled: true
+                                                },
+                                                enableMouseTracking: true
+                                            }
+                                        },
+
+                                        series: [{
+                                                name: 'Poids',
+                                                data: [{% for i in liste%}[Date.UTC({{i.date}}), {{i.poids}}],{%endfor%} ]
+                                            }],
+
+                                        responsive: {
+                                            rules: [{
+                                                    condition: {
+                                                        maxWidth: 500
+                                                    },
+                                                    chartOptions: {
+                                                        legend: {
+                                                            layout: 'horizontal',
+                                                            align: 'center',
+                                                            verticalAlign: 'bottom'
+                                                        }
+                                                    }
+                                                }]
+                                        }
+
+                                    });
+                                    
+                                });
+                    </script>
+                </div>
+            </div>
+            <div class="footer">
+                <a value="back" class="btn btn-default" href="index.php?page=fichePatient&id_patient={{get.id_patient}}" role="button">Précédent</a>
+            </div>
+
+        {%endif%}
+    </div>
+
+
+
+{% endblock %}

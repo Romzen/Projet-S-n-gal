@@ -1,0 +1,74 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Répartition poids {% endblock %}
+{% block body %}
+
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Repartition des patients par protocole en fonction du poids</h2>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+          
+                    
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-9">
+                                    <h3 class="panel-title">Répartition des patients par protocole national</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table style="min-width : 100%" id="repDataTable1" class="table table-striped table-bordered table-list ">
+                                <thead>
+                                    <tr>
+                                        <th>Protocole</th>
+                                        <th>Inférieur à 15 kg</th>
+                                        <th>De 15 à 30kg</th>
+                                        <th>De 30 à 45kg</th>
+                                        <th>De 45 à 60kg</th>
+                                        <th>Plus de 60kg</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for poids in listeP%}
+                                        <tr>
+                                            <td>{{poids.protocole}}</td>
+                                            <td>{{poids.nombre1}}</td>
+                                            <td>{{poids.nombre2}}</td>
+                                            <td>{{poids.nombre3}}</td>
+                                            <td>{{poids.nombre4}}</td>
+                                            <td>{{poids.nombre5}}</td>
+                                        </tr>
+                                    {%endfor%}
+                                     
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                    
+            
+
+           
+                
+
+            </div>
+        </div>
+    </div>
+ 
+{%endblock%}
+

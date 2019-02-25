@@ -1,0 +1,114 @@
+{% extends "_base.html.twig" %}
+{% block style %}{% endblock %}
+{% block title %} {{ parent() }} Modification protocole {% endblock %}
+{% block body %}
+
+
+
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+
+                {% if form.protocole is defined %} 
+                    {% if form.protocole != null %}
+
+                        <br>
+
+                        <form class="form-group" method="POST" action="index.php?page=modifProtocole" enctype="multipart/form-data">
+
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">
+
+                                    <div class="panel-title">
+
+                                        <div class="center">
+
+                                            <h3>Modification d'un protocole</h3>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-body">
+
+                                    <input type="hidden" value="{{form.protocole.id_proto}}" name="id_proto" id="id_proto"/>
+
+                                    <label>Nom du protocole </label>
+                                    <input class="form-control" type="text" name="nom_proto" id="nom_proto" value="{{form.protocole.nom_proto}}"/><br>
+
+                                    <label>Adulte</label>
+                                    <select class="form-control" id="adulte" name="adulte">
+                                        <option value="Oui" >Oui</option>
+                                        <option value="Non" >Non</option>
+                                    </select><br>
+                                    <!--<input class="form-control" type="text" name="adulte" id="adulte" value="{{form.protocole.adulte}}"/><br>-->
+
+                                    <label>Enfant</label>
+                                    <select class="form-control" id="enfant" name="enfant">
+                                        <option value="Oui" >Oui</option>
+                                        <option value="Non" >Non</option>
+                                    </select><br>
+                                    <!--<input class="form-control" type="text" name="enfant" id="enfant" value="{{form.protocole.enfant}}"/><br>-->
+
+                                    <label>Remarque</label>
+                                    <input class="form-control" type="text" name="remarque" id="remarque" value="{{form.protocole.remarque}}"/><br>
+
+                                    <label>Type de protocole</label>
+                                    <select class="form-control" id="type_protocole" name="type_protocole">
+                                        {% for t in liste  %}
+                                            {% if t.id_type_protocole==form.protocole.type_protocole %}
+                                                <option value="{{ t.id_type_protocole }}" selected>{{ t.type_protocole }}</option>
+                                            {% else %}
+                                                <option value="{{ t.id_type_protocole }}">{{ t.type_protocole }}</option>   
+                                            {% endif %}    
+                                        {% endfor %}
+                                    </select>
+                                    <br><br>
+
+                                    <div class="pull-right">
+
+                                        <a class="btn btn-default" value="back" onclick="history.go(-1)" role="button">Précédent</a>  
+                                        <button type="submit" class="btn btn-warning" id="btModifier" name="btModifier">Modifier</button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    {% else %} 
+                        <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+                        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=protocole">Retourner sur la liste des protocoles</a></h1>
+                    {% endif %}
+
+                {% else %} 
+
+                    {% if form.valide == true %}
+
+                        <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+                        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=protocole">Retourner sur la liste des protocoles</a></h1>
+
+                    {% else %}
+
+                        <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+                        <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=protocole">Retourner sur la liste des protocoles</a></h1>
+
+                    {% endif %} 
+
+                {% endif %}
+
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+{% endblock %}

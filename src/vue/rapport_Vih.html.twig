@@ -1,0 +1,106 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Utilisateurs {% endblock %}
+{% block body %}
+
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+
+            <br>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="center">
+                        <h2>Rapport VIH</h2>
+                    </div>
+                </div>
+            </div>            
+
+            <table style="min-width : 100%" id="repDataTable1" class="table table-striped table-bordered table-list display">
+
+                <tr>
+                    <th colspan="3" class="Ligneverte" style="background-color: antiquewhite"> AGE </th>
+                    <th  style="background-color: antiquewhite"> SEXE </th>
+                    <th  style="background-color: antiquewhite"> Patients enregistrés depuis le dernier rapport </th>
+                    <th  style="background-color: antiquewhite"> Nombre de patients régulierement suivi depuis le dernier rapport </th>
+                    <th  style="background-color: antiquewhite"> Nombre de nouveau patients ce mois ci </th>
+                    <th  style="background-color: antiquewhite"> Nombre de décès durant le mois </th>
+                    <th  style="background-color: antiquewhite"> Nombre de patients perdus de vue ce mois ci </th>
+                    <th  style="background-color: antiquewhite"> Nombre de perdus de vue / revenus ce mois ci </th>
+                    <th  style="background-color: antiquewhite"> Nombre de patients transférés dans ce site ce mois ci </th>
+                    <th  style="background-color: antiquewhite"> Nombre de patients transférés vers un autre site </th>
+                    <th  style="background-color: antiquewhite"> Nombre de patients total régulièrement suivis </th>
+                </tr>
+
+                <tr>
+                    <th colspan="3" rowspan="2" style="background-color: antiquewhite"> 0-14 ans</th>
+                    <th  style="background-color: antiquewhite"> G </th>
+                    <td> {{compteur1.garçon}}</td>
+                    <td> {{compteur2.garçon}}</td>
+                    <td> {{compteur3.garçon}}</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+
+                </tr>
+
+                <tr>
+                    <th  style="background-color: antiquewhite"> F </th>
+                    <td> {{compteur1.fille}}</td>
+                    <td> {{compteur2.fille}}</td>
+                    <td> {{compteur3.fille}}</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+
+                <tr>
+                    <th colspan="3" rowspan="2" style="background-color: antiquewhite"> >14 ans </th>
+                    <th style="background-color: antiquewhite"> H </th>
+                    <td>{{compteur1.homme}} </td>
+                    <td>{{compteur2.homme}} </td>
+                    <td> {{compteur3.homme}}</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+
+                </tr>
+
+                <tr>
+                    <th  style="background-color: antiquewhite"> F </th>
+                    <td> {{compteur1.femme}}</td>
+                    <td> {{compteur2.femme}}</td>
+                    <td> {{compteur3.femme}}</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+
+                <tr>
+                    <th colspan="4" style="background-color: antiquewhite">Total</th>
+                    <td>{{compteur1.total}} </td>
+                    <td> {{compteur2.total}}</td>
+                    <td>{{compteur3.total}} </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+
+            </table>
+
+        {%endblock%}

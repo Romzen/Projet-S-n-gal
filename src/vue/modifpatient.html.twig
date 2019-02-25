@@ -1,0 +1,148 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} Modifier Patient {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">                
+            <br>
+            {%if form.suppyes == true%}
+                <br><div class=" center alert alert-success" role="alert">Suppression effectuée !</div>
+                <a href="index.php?page=patient">Retourner à la liste des patients</a>
+            {%else%}
+                <form method="POST" action="index.php?page=modifPatient&id_patient={{unPatient.id_patient}}" enctype="multipart/form-data">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">                        
+                        <div class="panel panel-default">
+                            {%if form.suppno == true %}
+                                <br><div class="center alert alert-danger" role="alert">Erreur de Suppression !</div>
+                            {%endif%}
+                            {%if form.modifno == true%}
+                                <br><br><div class="center alert alert-danger" role="alert">Erreur de modification !</br></div>
+                            {%endif%}
+                            {%if form.modifyes == true%}
+                                <br><div class="center alert alert-success" role="alert">Modification effectuée !</div>
+                            {%endif%}                        
+                            <div class="panel-heading">
+                                <div class="center ">
+                                    <h3>Modification du patient</h3>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <input class="form-control" type="hidden" name="id_patient" id="id_patient" value="{{unPatient.id_patient}}"/>
+
+
+
+                                <table style="min-width : 100%" class="table table-striped table-bordered table-list display">
+                                    <tr>
+                                        <th class="demitableau">Numéro d'identification national</th>
+                                        <td class="demitableau"><input class="form-control" type="text" name="num_id_national" id="num_id_national" value="{{unPatient.num_id_national}}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Numéro d'inclusion</th>
+                                        <td class="demitableau"><input class="form-control" type="text" value="{{unPatient.num_inclusion}}" name="num_inclusion" id="num_inclusion"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Profil sérologique</th>
+                                        <td class="demitableau"><select class="form-control" id="profil_serologique" name="profil_serologique">
+                                                {%for lpr in listeProfil %}
+
+                                                    {%if lpr.id_profil == unPatient.profil_serologique %}                                              
+                                                        <option selected="selected" value="{{lpr.id_profil}}">{{lpr.nom_profil}}</option>                                              
+                                                    {%else%}                                              
+                                                        <option value="{{lpr.id_profil}}">{{lpr.nom_profil}}</option>                                              
+                                                    {%endif%}
+                                                {%endfor%}                                          
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Sexe</th>
+                                        <td class="demitableau"><input class="form-control" type="text" name="sexe" id="sexe" value="{{unPatient.sexe}}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Date de naissance</th>
+                                        <td class="demitableau"><input class="form-control" type="date" name="date_de_naissance" id="date_de_naissance" value="{{unPatient.date_de_naissance}}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Date d'inclusion</th>
+                                        <td class="demitableau"><input class="form-control" type="date" name="date_inclusion" id="date_inclusion" value="{{unPatient.date_inclusion}}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Protocole</th>
+                                        <td class="demitableau"><select class="form-control" id="protocole" name="protocole">
+                                                {%for lpro in listeProto %}                                            
+                                                    {%if lpro.id_proto == unPatient.protocole%}                                                
+                                                        <option selected="selected" value="{{lpro.id_proto}}">{{lpro.nom_proto}}</option>                                                
+                                                    {%else%}                                                
+                                                        <option value="{{lpro.id_proto}}">{{lpro.nom_proto}}</option>                                                
+                                                    {%endif%}
+                                                {%endfor%}                                          
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Co-Infections</th>
+                                        <td class="demitableau"><select class="form-control" id="co_infection" name="co_infection">
+                                                {%for lcoinf in listeCoInf%}
+
+                                                    <option value="{{lcoinf.id_co_infection}}">{{lcoinf.nom_co_infection}}</option>
+                                                {%endfor%}
+                                            </select></td>
+                                    </tr>                                
+                                    <tr>
+                                        <th class="demitableau">Ligne de traitement</th>
+                                        <td class="demitableau"><select class="form-control" name="ligne">
+                                                {%for ll in listeLigne%}
+                                                    {%if ll.id_ligne == unPatient.ligne%}
+                                                        <option value="{{ll.id_ligne}}" selected>{{ll.nom_ligne}} </option>
+                                                    {%else%}
+                                                        <option value="{{ll.id_ligne}}">{{ll.nom_ligne}}</option>
+                                                    {%endif%}
+                                                {%endfor%}
+                                            </select></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="demitableau">Poids (kg)</th>
+                                        <td class="demitableau"><input class="form-control" type="text" name="poids" id="poids" value="{{unPatient.poids}}"/></td>
+                                    </tr>                                 
+                                    <tr>
+                                        <th class="demitableau">Type d'inclusion</th>
+                                        <td class="demitableau"><select class="form-control" name="inclusion">
+                                                {%for li in listeInclusion%}
+                                                    {%if li.id_inclusion == unPatient.inclusion%}
+                                                        <option value="{{li.id_inclusion}}" selected>{{li.type_inclusion}} </option>
+                                                    {%else%}
+                                                        <option value="{{li.id_inclusion}}">{{li.type_inclusion}}</option>
+                                                    {%endif%}
+                                                {%endfor%}
+                                            </select></td>
+                                    </tr>
+                                </table>
+
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col col-xs-4">
+                                            <div class="form-group" style="float : left">
+                                                <a class="btn btn-default" href="index.php?page=fichePatient&id_patient={{unPatient.id_patient}}">Revenir à la Fiche du Patient</a>
+                                            </div>
+                                        </div>
+                                        <div class="col col-xs-8">
+
+                                            <div class="form-group" style="float : right">
+                                                <button type="submit" class="btn btn-warning" id="btModifier" name="btModifier">Modifier</button>
+                                                <button type="submit" class="btn btn-danger" id="btSupprimer" name="btSupprimer" onClick="return confirm('Etes-vous sûr de vouloir supprimer ce patient ?');">Supprimer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            {%endif%}
+        </div>    
+
+    </div>
+{%endblock%}

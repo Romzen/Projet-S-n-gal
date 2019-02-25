@@ -1,0 +1,97 @@
+{% extends "_base.html.twig" %}
+{% block title %} {{ parent() }} RDV {% endblock %}
+{% block body %}
+
+<form class="form-group" method="POST" action="index.php?page=listeRDV" enctype="multipart/form-data" >
+    <!--<div id="content-wrapper">-->
+    <div class="container">
+        <div class="mui--appbar-height"></div>
+        <div class="mui-container-fluid">
+            <div class="panel panel-default">
+		<div class="panel-heading">
+                    <div class="center">
+                        <h2>Liste des rendez-vous</h2>
+                    </div>
+		</div>
+            </div>
+            
+            {%if form.valide == false%}
+                <div class="alert alert-info" role="alert"><center>{{form.message}}</center></div>                
+                {%endif%}
+            
+            {%if form.nombreRDV > 0 %}
+                <div class="alert alert-success" role="alert">
+                    
+                    <center> Vous avez  <strong><span class="badge ">{{form.nombreRDV}}</span> </strong> rendez-vous aujourdhui
+                        <a class="btn btn-success" href="index.php?page=listeRDVJour" role="button">Voir ces derniers</a>
+                    </center>
+                </div>
+            {%endif%}
+            {%if form.nombreAbs > 0 %}
+                <div class="alert alert-danger" role="alert">
+                    
+                    <center> Il y a  <span class="badge">{{form.nombreAbs}} </span> absents
+                        <a class="btn btn-danger" href="index.php?page=listeAbsent" role="button">Voir ces derniers</a>
+                    </center>
+                </div>
+            {%endif%}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">
+                                    <h3 class="panel-title">Liste des rendez-vous</h3>
+                                </div>
+                          <!--<div class="col col-xs-6 text-right">
+                                  <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                          </div>-->
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table style="min-width : 100%" id="repDataTable1" class="table table-striped table-bordered table-list display">                                
+                                <thead>
+                                    <tr>
+                                        <th>Numéro d'id national</th>
+                                        <th>Numéro d'inclusion</th>
+                                        <th>Date de rendez-vous</th>
+                                        <th>Etat du RDV</th>
+                                        <th>Voir tout les rendez-vous du patient</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                        {%for la in listeRDV2%}                             
+                                                <tr>
+                                                    <td><a href="index.php?page=fichePatient&id_patient={{la.id_patient}}">{{la.num_id_national}}</a></td>
+                                                    <td>{{la.num_inclusion}}</td>                                                
+                                                    <td><a href="index.php?page=ajouterDispensationPourLePatient&id_patient={{la.id_patient}}">{{la.rdv}}</a></td>
+                                                    <td>{{la.etat}}</td>
+                                                    <td><center><a class="btn btn-default" href="index.php?page=listeRDVPatient&id_patient={{la.id_patient}}" role="button">Voir ces derniers</a></center></td>
+                                                </tr> 
+                                            
+                                        {%endfor%}
+                                </tbody>                                
+                            </table>
+                         </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col col-xs-4">Page 1 sur 1</div>
+                                <div class="col col-xs-8">
+                                    <ul class="pagination hidden-xs pull-right">
+                                        <li><a href="#">1</a></li>
+                                    </ul>
+                                    <ul class="pagination visible-xs pull-right">
+                                        <li><a href="#">«</a></li>
+                                        <li><a href="#">»</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{%endblock%}
